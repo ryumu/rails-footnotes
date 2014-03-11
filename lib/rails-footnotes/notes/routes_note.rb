@@ -56,5 +56,9 @@ module Footnotes
 end
 
 if Footnotes::Notes::RoutesNote.included?
-  ActionController::Routing::RouteSet.send :include, Footnotes::Extensions::Routes
+  if Rails::VERSION::MAJOR >= 4
+    ActionDispatch::Routing::RouteSet.send :include, Footnotes::Extensions::Routes
+  else
+    ActionController::Routing::RouteSet.send :include, Footnotes::Extensions::Routes
+  end
 end
